@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Simulation {
     private final Vehicle vehicle;
 
@@ -27,15 +29,18 @@ public class Simulation {
     }
 
     public String getHeader() {
-        String s = "";
-        s = s + "\nTime\t";
-        s = s + "Velocity\t\t"; s = s + "Fuel\t\t";
-        s = s + "Altitude\t\t"; s = s + "Burn\n";
-        s = s + "----\t";
-        s = s + "-----\t\t";
-        s = s + "----\t\t";
-        s = s + "------\t\t"; s = s + "----\n";
-        return s;
+        StringBuilder str = new StringBuilder();
+        str.append("\nTime\t")
+                .append("Velocity\t\t")
+                .append("Fuel\t\t")
+                .append("Altitude\t\t")
+                .append("Burn\n")
+                .append("----\t")
+                .append("-----\t\t")
+                .append("----\t\t")
+                .append("------\t\t\t")
+                .append("----\n");
+        return str.toString();
     }
 
 
@@ -66,16 +71,19 @@ public class Simulation {
             }
         }
         printString(vehicle.checkFinalStatus());
-        if (status != null) {
-            return status.getStatus();
+        if (vehicle.getStatus(burnInterval) != null) {
+            return vehicle.getStatus(burnInterval).getStatus();
         }
         return -1;
     }
 
     public static void main(String[] args) {
         // create a new Simulation object with a random starting altitude
+        Simulation sim = new Simulation(new Vehicle(randomaltitude()));
         // create a new BurnInputStream
+        BurnInputStream input = new BurnInputStream();
         // pass the new BurnInputStream to the runSimulation method
+        sim.runSimulation(input);
     }
 
 }

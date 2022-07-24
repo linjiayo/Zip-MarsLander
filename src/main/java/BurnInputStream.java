@@ -13,6 +13,7 @@ public class BurnInputStream implements BurnStream {
                     return burn;
                 } catch (NumberFormatException e) {
                     System.err.println("Must Enter a Number (0-200)");
+                    scanner.next();
                 }
             }
         }

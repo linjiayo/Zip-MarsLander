@@ -23,24 +23,27 @@ public class SimulationTest {
         BurnStream burnSource = new BurnDataStream(burns);
         Simulation game = new Simulation(new Vehicle(5000));
         int okay = game.runSimulation(burnSource);
-        Assert.assertEquals(Vehicle.CRASHED, okay);
+        Assert.assertEquals(Vehicle.DEAD, okay);
     }
 
     @Test
     public void runSimulationComputer() {
         BurnStream burnSource = new OnBoardComputer();
-        Simulation game = new Simulation(new Vehicle(10000));
+        Simulation game = new Simulation(new Vehicle(8000));
         int okay = game.runSimulation(burnSource);
         Assert.assertEquals(okay, Vehicle.SUCCESS);
     }
 
     @Test
     public void runSimulationComputerRandom() {
-        BurnStream burnSource = new OnBoardComputer();
-        Simulation game = new Simulation(new Vehicle(Simulation.randomaltitude()));
-        //Simulation game = new Simulation(new Vehicle(15000));
-        int okay = game.runSimulation(burnSource);
-        Assert.assertEquals(okay, Vehicle.SUCCESS);
+        // run 500 simulations
+        for (int i = 0; i < 500; i++) {
+            BurnStream burnSource = new OnBoardComputer();
+            Simulation game = new Simulation(new Vehicle(Simulation.randomaltitude() + 1000));
+            //Simulation game = new Simulation(new Vehicle(15000));
+            int okay = game.runSimulation(burnSource);
+            Assert.assertEquals(okay, Vehicle.SUCCESS);
+        }
     }
 
 }
