@@ -7,15 +7,15 @@ public class OnBoardComputer implements BurnStream {
         int altitude = status.getAltitude();
         int target = Math.max(2, (int) (0.8 * Math.sqrt(altitude)));
 
-        if (altitude < 600) {
+        if (altitude < 300) {
             if (velocity > target) {
                 burn = Math.min(200, velocity - target + 100);
             } else {
                 burn = Math.max(0, velocity - target + 100);
             }
-        } else if (altitude / (double) velocity < 6) {
+        } else if (altitude / (double) velocity < 7) {
             burn = 200;
-        } else if (altitude / (double) velocity > 17) {
+        } else if (altitude / (double) velocity > 18) {
             burn = 0;
         }  else {
             burn = 100;
